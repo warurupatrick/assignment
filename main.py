@@ -49,3 +49,28 @@ with open('weather.csv', 'r') as file:
     print(f'Most common temperature: {most_common_temp} (count: {most_common_count})')
 
 
+
+import matplotlib.pyplot as plt
+
+# open the CSV file
+with open('weather.csv', 'r') as file:
+    reader = csv.DictReader(file)
+
+    # get the last 20 rows
+    data = list(reader)[-20:]
+
+    # extract dates and temperatures into separate lists
+    dates = [row['Formatted Date'] for row in data]
+    temps = [float(row['Temperature (C)']) for row in data]
+
+    # plot the graph
+    plt.plot(dates, temps)
+    plt.xticks(rotation=90)
+    plt.xlabel('Date')
+    plt.ylabel('Temperature')
+    plt.title('Temperature of Syria (Last 20 Days)')
+    #plt.show()
+    plt.savefig('graph.png')
+
+
+
